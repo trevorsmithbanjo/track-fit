@@ -16,8 +16,16 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// ==== Connect Mongoose ==== //
+mongoose.connect("mongodb://localhost/workout", {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+});
+
 // ==== Routes ==== //
 require("./routes/html-routes")(app);
+require("./routes/api-routes")(app);
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
